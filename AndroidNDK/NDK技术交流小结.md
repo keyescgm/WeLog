@@ -1,4 +1,5 @@
-#NDK技术交流小结
+# NDK技术交流小结
+
 JNI是一种在Java虚拟机控制下执行代码的标准机制。代码被编写成汇编程序或者C/C++程序，并组装为动态库。也就允许了非静态绑定用法。
 这提供了一个在Java平台上调用C/C++的一种途径，反之亦然。它允许Java类的某些方法原生实现，同时让它们能够像普通Java方法一样被调用和使用。
 
@@ -20,6 +21,8 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
    2、生成.h头文件 ， 需要使用到的java命令是javah
    javad -d jni -classpath . 类的路径
    生成文件如下
+   
+   ```
    #include <jni.h>
    /* Header for class com_keyes_jnitest_HelloJni */
 
@@ -90,11 +93,13 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
 
           return (*env)->NewStringUTF(env, "Hello from JNI !  Compiled with ABI " ABI ".");
       }
+```
 
    4、通过ndk-build生成动态链接库
    ndk-build
 
    5、配置环境
+   
    编写Android.mk
    LOCAL_PATH := $(call my-dir)
 
@@ -118,8 +123,8 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
         static {
            System.loadLibrary("HelloJni");
        }
-   7、调用本地方法并执行
-      调用getName()执行java文件即可
+   7. 调用本地方法并执行调用getName()执行java文件即可
+      
 2、动态注册
    步骤和动态注册类似，注意的地方
    添加Application.mk文件
@@ -128,6 +133,7 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
 
    生成的C文件，需要这样修改
    // jni头文件
+   ```
    #include <jni.h>
 
    #include <cassert>
@@ -140,6 +146,7 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
    jint get_random_num(){
        return rand();
    }
+   
    /*需要注册的函数列表，放在JNINativeMethod 类型的数组中，
    以后如果需要增加函数，只需在这里添加就行了
    参数：
@@ -185,5 +192,6 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
        //返回jni 的版本
        return JNI_VERSION_1_6;
    }
+```
 
 ——————————
