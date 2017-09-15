@@ -1,7 +1,8 @@
 #NDK技术交流小结
+```
 JNI是一种在Java虚拟机控制下执行代码的标准机制。代码被编写成汇编程序或者C/C++程序，并组装为动态库。也就允许了非静态绑定用法。
 这提供了一个在Java平台上调用C/C++的一种途径，反之亦然。它允许Java类的某些方法原生实现，同时让它们能够像普通Java方法一样被调用和使用。
-
+```
 #环境
 Java、AndroidStudio、AndroidSDK、NDK、Gradle
 
@@ -121,6 +122,7 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
    7、调用本地方法并执行
       调用getName()执行java文件即可
 2、动态注册
+```
    步骤和动态注册类似，注意的地方
    添加Application.mk文件
    APP_ABI := all
@@ -185,5 +187,4 @@ Java、AndroidStudio、AndroidSDK、NDK、Gradle
        //返回jni 的版本
        return JNI_VERSION_1_6;
    }
-
-——————————
+```
